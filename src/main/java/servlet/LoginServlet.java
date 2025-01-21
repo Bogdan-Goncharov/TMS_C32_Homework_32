@@ -12,17 +12,11 @@ import model.User;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final Map<String, String> users = new HashMap<>();
-
-    static {
-        users.put("admin", "1");
-        users.put("user", "1");
-    }
+    private static final Map<String, String> users = RegisterServlet.users;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
