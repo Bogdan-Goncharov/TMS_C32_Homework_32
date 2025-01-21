@@ -1,6 +1,8 @@
 package servlet;
 
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,30 +15,37 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final Map<String, String> users = new HashMap<>();
 
     static {
-        users.put("admin", "ADMIN");
-        users.put("user", "USER");
+        users.put("admin", "1");
+        users.put("user", "1");
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/login.html").forward(req, resp);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
 
-        if (username != null && "qwerty".equals(password) && users.containsKey(username)) {
-            String role = users.get(username);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", new User(username, role));
-            response.getWriter().write("Login successful! Welcome, " + username + "!");
+        if (username != null && password != null && users.containsKey(username) && users.get(username).equals(password)) {
+            String role = "USER"; // Определяем роль на основе имени пользователя
+            if ("admin".equals(username)) {
+                role = "ADMIN";
+            }
+            HttpSession session = req.getSession();
+            session.setAttribute("user", new User(username, password, role));
+            resp.getWriter().write("Login successful! Welcome, " + username + "!");
+            resp.sendRedirect("/home");
+        } else {
+            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            resp.getWriter().write("Invalid username or password.");
         }
-
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Invalid username or password.");
-
     }
 }

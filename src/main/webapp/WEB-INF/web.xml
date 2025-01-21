@@ -3,27 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
-
+<welcome-file-list>
+  <welcome-file>login.html</welcome-file>
+</welcome-file-list>
   <listener>
     <listener-class>listener.LoginListener</listener-class>
   </listener>
-
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>servlet.HomeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
-  </servlet-mapping>
-
+  
 </web-app>

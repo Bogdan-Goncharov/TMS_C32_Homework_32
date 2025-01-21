@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @WebListener
 public class LoginListener implements HttpSessionAttributeListener {
 
-    private static final String LOG_FILE = "src/main/resources/logs.txt";
+    private static final String LOG_FILE = "\"C:\\Users\\user.WIN-KLKMDAT4B5D\\IdeaProjects\\TMS_C32_Homework_25\\src\\main\\resources\\logs.txt\"";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
