@@ -17,6 +17,7 @@ import java.util.Map;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final Map<String, String> users = RegisterServlet.users;
+    private static final Map<String, String> roles = RegisterServlet.roles;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,10 +30,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if (username != null && password != null && users.containsKey(username) && users.get(username).equals(password)) {
-            String role = "USER"; // Определяем роль на основе имени пользователя
-            if ("admin".equals(username)) {
-                role = "ADMIN";
-            }
+            String role = roles.get(username); // Получаем роль пользователя
             HttpSession session = req.getSession();
             session.setAttribute("user", new User(username, password, role));
             resp.getWriter().write("Login successful! Welcome, " + username + "!");
