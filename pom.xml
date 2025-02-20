@@ -9,21 +9,45 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.1.0</version>
+      <scope>provided</scope>
     </dependency>
-      <!-- Jakarta Servlet API -->
-      <dependency>
-        <groupId>jakarta.servlet</groupId>
-        <artifactId>jakarta.servlet-api</artifactId>
-        <version>6.1.0</version>
-        <scope>provided</scope>
-      </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>apache-jstl</artifactId>
+      <version>11.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.5.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+      <version>11.3.1</version>
+    </dependency>
 
   </dependencies>
   <build>
     <finalName>TMS_C32_Homework_25</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>11.3.1</version>
+        <configuration>
+          <url>jdbc:postgresql://localhost:8080/database</url>
+          <user>user</user>
+          <password>0305</password>
+          <baselineVersion>1.0.0</baselineVersion>
+          <cleanDisabled>true</cleanDisabled>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
